@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Book List</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-4">Available Books</h1>
+      <table class="table table-striped mt-4">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Published Date</th>
+            <th>ISBN</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in books %}
+          <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.published_date }}</td>
+            <td>{{ book.isbn }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4">No books available.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="mt-4">Admin Dashboard</h2>
+      <a href="{% url 'admin-create-book' %}" class="btn btn-success mb-3"
+        >Add New Book</a
+      >
+      <a
+        href="{% url 'admin-logout' %}"
+        class="btn btn-secondary mb-3 float-right"
+        >Logout</a
+      >
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Published Date</th>
+            <th>ISBN</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in books %}
+          <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.published_date }}</td>
+            <td>{{ book.isbn }}</td>
+            <td>
+              <a
+                href="{% url 'admin-update-book' book.pk %}"
+                class="btn btn-primary btn-sm"
+                >Edit</a
+              >
+              <a
+                href="{% url 'admin-delete-book' book.pk %}"
+                class="btn btn-danger btn-sm"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5">No books available.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
