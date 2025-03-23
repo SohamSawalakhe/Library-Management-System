@@ -1,4 +1,5 @@
-# Library-Management-System
+# Library Management System
+
 This project is a Library Management System built with Django, Django REST Framework, and MySQL. It provides two ways to interact with the system:
 
 1. **REST API Endpoints:**  
@@ -57,21 +58,19 @@ This project is a Library Management System built with Django, Django REST Frame
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/your_username/library_management.git
+   git clone https://github.com/SohamSawalakhe/library_management.git
    cd library_management
-Create and Activate a Virtual Environment:
 
-bash
-Copy
-Edit
+## Create and Activate a Virtual Environment:
+
+```bash
 python -m venv env
 source env/bin/activate  # On Windows: env\Scripts\activate
-Install Dependencies:
 
-bash
-Copy
-Edit
+## Install Dependencies
+```bash
 pip install -r requirements.txt
+
 If you don't have a requirements.txt file, ensure you install:
 
 Django
@@ -82,8 +81,7 @@ mysqlclient (or PyMySQL)
 
 djangorestframework-authtoken
 
-Configure MySQL Database:
-
+Configure MySQL Database
 Create a database in MySQL (e.g., library_db). Then update the library_management/settings.py file with your database credentials:
 
 python
@@ -99,29 +97,25 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-Set Custom User Model:
-
+Set Custom User Model
 In library_management/settings.py, add:
 
 python
 Copy
 Edit
 AUTH_USER_MODEL = 'library_app.AdminUser'
-Apply Migrations:
-
+Apply Migrations
 bash
 Copy
 Edit
 python manage.py makemigrations
 python manage.py migrate
-Create a Superuser (Optional):
-
+Create a Superuser (Optional)
 bash
 Copy
 Edit
 python manage.py createsuperuser
-Collect Static Files (for production, if needed):
-
+Collect Static Files (For Production)
 bash
 Copy
 Edit
@@ -133,14 +127,11 @@ bash
 Copy
 Edit
 python manage.py runserver
-You can now access the application on http://localhost:8000.
+Access the application at: http://localhost:8000.
 
 API Endpoints
-These endpoints use token-based authentication (except for signup and book list).
-
 Admin API Endpoints
-Signup:
-
+Signup
 URL: /api/admin/signup/
 
 Method: POST
@@ -155,8 +146,7 @@ Edit
   "name": "Admin Name",
   "password": "your_password"
 }
-Login:
-
+Login
 URL: /api/admin/login/
 
 Method: POST
@@ -171,19 +161,20 @@ Edit
   "password": "your_password"
 }
 Response:
-Returns a token (e.g., { "token": "your_token_here" }).
 
+json
+Copy
+Edit
+{ "token": "your_token_here" }
 Book API Endpoints
-List Books:
-
+List Books
 URL: /api/books/
 
 Method: GET
 
 Authentication: Not required
 
-Create Book:
-
+Create Book
 URL: /api/books/create/
 
 Method: POST
@@ -206,8 +197,7 @@ Edit
   "isbn": "9780743273565",
   "summary": "A classic novel set in the Jazz Age."
 }
-Retrieve/Update/Delete Book:
-
+Retrieve/Update/Delete Book
 URL: /api/books/<book_id>/
 
 Methods: GET, PUT, DELETE
@@ -220,58 +210,49 @@ Edit
 Authorization: Token your_token_here
 Direct Web Interface
 Admin Panel
-Use the admin panel to perform CRUD operations via a web interface using Django sessions.
-
-Admin Login:
-
+Admin Login
 URL: /admin-panel/login/
 
 Description: Login using admin credentials.
 
-Dashboard:
-
+Dashboard
 URL: /admin-panel/dashboard/
 
 Description: View a list of all books with options to add, update, or delete.
 
-Create Book:
-
+Create Book
 URL: /admin-panel/books/create/
 
 Description: Form to create a new book entry.
 
-Update Book:
-
+Update Book
 URL: /admin-panel/books/<book_id>/update/
 
 Description: Form to update an existing book.
 
-Delete Book:
-
+Delete Book
 URL: /admin-panel/books/<book_id>/delete/
 
 Description: Confirmation page to delete a book.
 
-Admin Logout:
-
+Admin Logout
 URL: /admin-panel/logout/
 
 Student View
-Student Book List:
-
+Student Book List
 URL: /student/books/
 
 Description: Public view to list all available books.
 
 Testing
-Using Postman:
+Using Postman
 Test the API endpoints by sending requests to the URLs listed above. For protected endpoints, include the header:
 
 makefile
 Copy
 Edit
 Authorization: Token your_token_here
-Using Django Test Suite:
+Using Django Test Suite
 Run tests (if written) with:
 
 bash
