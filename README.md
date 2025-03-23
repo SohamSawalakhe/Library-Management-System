@@ -58,7 +58,7 @@ This project is a Library Management System built with Django, Django REST Frame
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/SohamSawalakhe/library_management.git
+   git clone https://github.com/SohamSawalakhe/Library-Management-System.git
    cd library_management
 # Library Management System Setup Guide
 
