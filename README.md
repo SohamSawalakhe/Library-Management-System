@@ -60,38 +60,33 @@ This project is a Library Management System built with Django, Django REST Frame
    ```bash
    git clone https://github.com/SohamSawalakhe/library_management.git
    cd library_management
-Create and Activate a Virtual Environment:
+# Library Management System Setup Guide
 
-bash
-Copy
-Edit
+## Setup Instructions
+
+### Create and Activate a Virtual Environment:
+```bash
 python -m venv env
 source env/bin/activate  # On Windows: env\Scripts\activate
-Install Dependencies:
+```
+
+### Install Dependencies:
 
 If you have a requirements.txt file:
-
-bash
-Copy
-Edit
+```bash
 pip install -r requirements.txt
+```
+
 If not, ensure you install:
+- Django
+- djangorestframework
+- mysqlclient (or PyMySQL)
+- djangorestframework-authtoken
 
-Django
-
-djangorestframework
-
-mysqlclient (or PyMySQL)
-
-djangorestframework-authtoken
-
-Configure MySQL Database:
-
+### Configure MySQL Database:
 Create a database in MySQL (e.g., library_db). Then update the library_management/settings.py file with your database credentials:
 
-python
-Copy
-Edit
+```python
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -102,188 +97,149 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-Set Custom User Model:
+```
 
+### Set Custom User Model:
 In library_management/settings.py, add:
 
-python
-Copy
-Edit
+```python
 AUTH_USER_MODEL = 'library_app.AdminUser'
-Apply Migrations:
+```
 
-bash
-Copy
-Edit
+### Apply Migrations:
+```bash
 python manage.py makemigrations
 python manage.py migrate
-Create a Superuser (Optional):
+```
 
-bash
-Copy
-Edit
+### Create a Superuser (Optional):
+```bash
 python manage.py createsuperuser
-Collect Static Files (For Production, if needed):
+```
 
-bash
-Copy
-Edit
+### Collect Static Files (For Production, if needed):
+```bash
 python manage.py collectstatic
-Running the Project
-Start the Django development server with:
+```
 
-bash
-Copy
-Edit
+## Running the Project
+Start the Django development server with:
+```bash
 python manage.py runserver
+```
+
 You can now access the application at: http://localhost:8000.
 
-API Endpoints
+## API Endpoints
 These endpoints use token-based authentication (except for signup and listing books).
 
-Admin API Endpoints
-Signup:
+### Admin API Endpoints
 
-URL: /api/admin/signup/
-
-Method: POST
-
-Payload:
-
-json
-Copy
-Edit
+**Signup:**
+- URL: `/api/admin/signup/`
+- Method: POST
+- Payload:
+```json
 {
-  "email": "admin@example.com",
-  "name": "Admin Name",
-  "password": "your_password"
+    "email": "admin@example.com",
+    "name": "Admin Name",
+    "password": "your_password"
 }
-Login:
+```
 
-URL: /api/admin/login/
-
-Method: POST
-
-Payload:
-
-json
-Copy
-Edit
+**Login:**
+- URL: `/api/admin/login/`
+- Method: POST
+- Payload:
+```json
 {
-  "email": "admin@example.com",
-  "password": "your_password"
+    "email": "admin@example.com",
+    "password": "your_password"
 }
-Response: Returns a token (e.g., { "token": "your_token_here" }).
+```
+- Response: Returns a token (e.g., `{ "token": "your_token_here" }`).
 
-Book API Endpoints
-List Books:
+### Book API Endpoints
 
-URL: /api/books/
+**List Books:**
+- URL: `/api/books/`
+- Method: GET
+- Authentication: Not required
 
-Method: GET
-
-Authentication: Not required
-
-Create Book:
-
-URL: /api/books/create/
-
-Method: POST
-
-Headers:
-
-makefile
-Copy
-Edit
+**Create Book:**
+- URL: `/api/books/create/`
+- Method: POST
+- Headers:
+```
 Authorization: Token your_token_here
-Payload:
-
-json
-Copy
-Edit
+```
+- Payload:
+```json
 {
-  "title": "The Great Gatsby",
-  "author": "F. Scott Fitzgerald",
-  "published_date": "1925-04-10",
-  "isbn": "9780743273565",
-  "summary": "A classic novel set in the Jazz Age."
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "published_date": "1925-04-10",
+    "isbn": "9780743273565",
+    "summary": "A classic novel set in the Jazz Age."
 }
-Retrieve/Update/Delete Book:
+```
 
-URL: /api/books/<book_id>/
-
-Methods: GET, PUT, DELETE
-
-Headers:
-
-makefile
-Copy
-Edit
+**Retrieve/Update/Delete Book:**
+- URL: `/api/books/<book_id>/`
+- Methods: GET, PUT, DELETE
+- Headers:
+```
 Authorization: Token your_token_here
-Direct Web Interface
-Admin Panel
+```
+
+## Direct Web Interface
+
+### Admin Panel
 Use the admin panel (which uses session-based authentication) to perform CRUD operations.
 
-Admin Login:
+**Admin Login:**
+- URL: `/admin-panel/login/`
+- Description: Login using admin credentials.
 
-URL: /admin-panel/login/
+**Dashboard:**
+- URL: `/admin-panel/dashboard/`
+- Description: View a list of all books with options to add, update, or delete.
 
-Description: Login using admin credentials.
+**Create Book:**
+- URL: `/admin-panel/books/create/`
+- Description: Form to create a new book entry.
 
-Dashboard:
+**Update Book:**
+- URL: `/admin-panel/books/<book_id>/update/`
+- Description: Form to update an existing book.
 
-URL: /admin-panel/dashboard/
+**Delete Book:**
+- URL: `/admin-panel/books/<book_id>/delete/`
+- Description: Confirmation page to delete a book.
 
-Description: View a list of all books with options to add, update, or delete.
+**Admin Logout:**
+- URL: `/admin-panel/logout/`
 
-Create Book:
+**Student Book List:**
+- URL: `/student/books/`
+- Description: Public view to list all available books.
 
-URL: /admin-panel/books/create/
+## Testing
 
-Description: Form to create a new book entry.
-
-Update Book:
-
-URL: /admin-panel/books/<book_id>/update/
-
-Description: Form to update an existing book.
-
-Delete Book:
-
-URL: /admin-panel/books/<book_id>/delete/
-
-Description: Confirmation page to delete a book.
-
-Admin Logout:
-
-URL: /admin-panel/logout/
-
-Student View
-Student Book List:
-
-URL: /student/books/
-
-Description: Public view to list all available books.
-
-Testing
-Using Postman
+### Using Postman
 Test the API endpoints by sending requests to the URLs listed above. For protected endpoints, include the header:
-
-makefile
-Copy
-Edit
+```
 Authorization: Token your_token_here
-Using Django Test Suite
-Run tests (if written) with:
+```
 
-bash
-Copy
-Edit
+### Using Django Test Suite
+Run tests (if written) with:
+```bash
 python manage.py test
-Project Structure
-bash
-Copy
-Edit
+```
+
+## Project Structure
+```
 library_management/
 ├── library_management/
 │   ├── settings.py
@@ -296,8 +252,8 @@ library_management/
 │   ├── models.py
 │   ├── serializers.py
 │   ├── tests.py
-│   ├── views_api.py         # REST API endpoints
-│   ├── views_panel.py       # Direct web interface views
+│   ├── views_api.py    # REST API endpoints
+│   ├── views_panel.py  # Direct web interface views
 │   └── urls.py
 ├── templates/
 │   └── library_app/
@@ -310,3 +266,4 @@ library_management/
 │       └── student/
 │           └── book_list.html
 └── manage.py
+```
