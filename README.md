@@ -60,18 +60,22 @@ This project is a Library Management System built with Django, Django REST Frame
    ```bash
    git clone https://github.com/SohamSawalakhe/library_management.git
    cd library_management
+Create and Activate a Virtual Environment:
 
-## Create and Activate a Virtual Environment:
-
-```bash
+bash
+Copy
+Edit
 python -m venv env
 source env/bin/activate  # On Windows: env\Scripts\activate
+Install Dependencies:
 
-## Install Dependencies
-```bash
+If you have a requirements.txt file:
+
+bash
+Copy
+Edit
 pip install -r requirements.txt
-
-If you don't have a requirements.txt file, ensure you install:
+If not, ensure you install:
 
 Django
 
@@ -81,7 +85,8 @@ mysqlclient (or PyMySQL)
 
 djangorestframework-authtoken
 
-Configure MySQL Database
+Configure MySQL Database:
+
 Create a database in MySQL (e.g., library_db). Then update the library_management/settings.py file with your database credentials:
 
 python
@@ -97,41 +102,48 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-Set Custom User Model
+Set Custom User Model:
+
 In library_management/settings.py, add:
 
 python
 Copy
 Edit
 AUTH_USER_MODEL = 'library_app.AdminUser'
-Apply Migrations
+Apply Migrations:
+
 bash
 Copy
 Edit
 python manage.py makemigrations
 python manage.py migrate
-Create a Superuser (Optional)
+Create a Superuser (Optional):
+
 bash
 Copy
 Edit
 python manage.py createsuperuser
-Collect Static Files (For Production)
+Collect Static Files (For Production, if needed):
+
 bash
 Copy
 Edit
 python manage.py collectstatic
 Running the Project
-Start the Django development server:
+Start the Django development server with:
 
 bash
 Copy
 Edit
 python manage.py runserver
-Access the application at: http://localhost:8000.
+You can now access the application at: http://localhost:8000.
 
 API Endpoints
+These endpoints use token-based authentication (except for signup and listing books).
+
 Admin API Endpoints
-Signup
+Signup:
+
 URL: /api/admin/signup/
 
 Method: POST
@@ -146,7 +158,8 @@ Edit
   "name": "Admin Name",
   "password": "your_password"
 }
-Login
+Login:
+
 URL: /api/admin/login/
 
 Method: POST
@@ -160,21 +173,19 @@ Edit
   "email": "admin@example.com",
   "password": "your_password"
 }
-Response:
+Response: Returns a token (e.g., { "token": "your_token_here" }).
 
-json
-Copy
-Edit
-{ "token": "your_token_here" }
 Book API Endpoints
-List Books
+List Books:
+
 URL: /api/books/
 
 Method: GET
 
 Authentication: Not required
 
-Create Book
+Create Book:
+
 URL: /api/books/create/
 
 Method: POST
@@ -197,7 +208,8 @@ Edit
   "isbn": "9780743273565",
   "summary": "A classic novel set in the Jazz Age."
 }
-Retrieve/Update/Delete Book
+Retrieve/Update/Delete Book:
+
 URL: /api/books/<book_id>/
 
 Methods: GET, PUT, DELETE
@@ -210,36 +222,45 @@ Edit
 Authorization: Token your_token_here
 Direct Web Interface
 Admin Panel
-Admin Login
+Use the admin panel (which uses session-based authentication) to perform CRUD operations.
+
+Admin Login:
+
 URL: /admin-panel/login/
 
 Description: Login using admin credentials.
 
-Dashboard
+Dashboard:
+
 URL: /admin-panel/dashboard/
 
 Description: View a list of all books with options to add, update, or delete.
 
-Create Book
+Create Book:
+
 URL: /admin-panel/books/create/
 
 Description: Form to create a new book entry.
 
-Update Book
+Update Book:
+
 URL: /admin-panel/books/<book_id>/update/
 
 Description: Form to update an existing book.
 
-Delete Book
+Delete Book:
+
 URL: /admin-panel/books/<book_id>/delete/
 
 Description: Confirmation page to delete a book.
 
-Admin Logout
+Admin Logout:
+
 URL: /admin-panel/logout/
 
 Student View
-Student Book List
+Student Book List:
+
 URL: /student/books/
 
 Description: Public view to list all available books.
@@ -289,5 +310,3 @@ library_management/
 │       └── student/
 │           └── book_list.html
 └── manage.py
-
-
